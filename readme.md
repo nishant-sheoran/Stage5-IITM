@@ -1,9 +1,13 @@
 # RISC-V 5-Stage Pipelined Simulator
 
-This is a Single-stage and 5-stage pipelined RISC-V Simulator written in Python.
-The simulator reads the binary content of dmem.txt (data memory) and imem.txt (instruction memory) in `./iodir` and outputs step-by-step results in RFResult.txt (Register File Result) and StateResult.txt (Pipeline register state), the DMEMResult.txt (Data MEMory Result), and PerformanceMetrics_Result.txt
+This project is a Python-based simulator for the RISC-V instruction set, supporting both single-stage and 5-stage pipelined architectures. It is designed for educational and experimental purposes, focusing on basic arithmetic and logical operations, hazard detection, and pipeline visualization.
 
-This project is part of the NYU Master of Science in Computer Engineering (MSCE) course focused on Computing Systems Architecture (CSA).
+## Features
+- **5-Stage Pipeline Simulation:** Models IF, ID, EX, MEM, WB stages with hazard detection and forwarding.
+- **Single-Stage Simulation:** For comparison and reference.
+- **Graphical User Interface (GUI):** Built with Tkinter for easy visualization and control.
+- **Performance Metrics:** Automatically calculates and displays cycles, instructions, CPI, and IPC at the end of simulation.
+- **Flexible Input/Output:** Accepts custom input files and generates detailed output for registers, memory, and pipeline state.
 
 ## Schematic
 
@@ -30,20 +34,47 @@ Modified from [Textbook](##Reference) Figure 4.62
 **Description:**
 
 In the Five-Stage machine, I added the forwarding unit and the hazard control unit to solve hazards introduced in the Mulit-stage pipeline. I kept the design of the control unit and PCSrc (from the result of 3 logic gates) and significantly modified other parts of the branch condition  by moving it from the EX stage to the ID stage. Additionally, I implemented a dedicated forwarding unit to handle branch decision input choices.
-## Key Points to Know for Grading But Not Mentioned in the Provided Document
 
-1.	State Results:
-- State results are **not graded**.
-- Variations in implementation logic can cause differences in state results, which is fine.
-2. Grading Criteria:
-- Focus on Register File (RF) and Data Memory (DMEM) files; they must match test cases exactly.
-- Even minor discrepancies in binary values (e.g., a 1 instead of a 0) will result in point deductions.
-3. Performance Metrics:
-- Values like IPC and CPI must match expected results.
-- The way you format them should be fine, but preferred using the format provided for easier auto-grading.
-- Deviations may result in manual grading, which is discouraged due to added complexity.
-4. File Format:
-- Ensure output files (RF, DMEM) are identical to the provided format and test cases to avoid issues during grading.
+## How to Use
+
+### 1. **Running the GUI**
+- Make sure you have Python 3 and all dependencies installed (`pip install -r requirements.txt`).
+- Run the GUI:
+  ```bash
+  python pipeline_gui.py
+  ```
+- Use the GUI to:
+  - Load a folder containing `imem.txt` (instruction memory) and `dmem.txt` (data memory).
+  - Step through the simulation cycle by cycle.
+  - Visualize the pipeline stages and see the current state.
+  - At the end, view performance metrics in a popup.
+
+### 2. **Input Files**
+- `imem.txt`: Each line is 8 bits (one byte) in binary, representing the instruction memory.
+- `dmem.txt`: Each line is 8 bits (one byte) in binary, representing the data memory.
+- Place both files in the same folder and select either one when loading input in the GUI.
+
+### 3. **Output Files**
+- `FS_/RFResult.txt`: Register file state after each cycle (FS mode).
+- `StateResult_FS.txt`: Pipeline state after each cycle (FS mode).
+- `FS_DMEMResult.txt`: Data memory after simulation (FS mode, if enabled).
+- `PerformanceMetrics_Result.txt`: Performance metrics (cycles, instructions, CPI, IPC).
+- Other files may be generated for single-stage mode or for reference.
+
+### 4. **Performance Metrics**
+- At the end of simulation, the GUI will display:
+  - Number of cycles taken
+  - Total number of instructions
+  - Cycles per instruction (CPI)
+  - Instructions per cycle (IPC)
+- These are also saved to `PerformanceMetrics_Result.txt` in your input/output folder.
+
+## Project Structure
+- `pipeline_gui.py`: Main GUI for running and visualizing the simulator.
+- `src/`: Source code for the simulator core, memory, register file, hazard handling, and metrics.
+- `input/`: Example input files (`imem.txt`, `dmem.txt`, `Code.asm`).
+- `Sample_Testcases_FS/`: Sample testcases with input and reference output files.
+- `docs/`: Schematics and documentation.
 
 ## Reference
 
