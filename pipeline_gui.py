@@ -102,7 +102,7 @@ class PipelineGUI:
             f"PC: {state.IF.get('PC', '-')}",
             f"Instr: {format(state.ID.get('Instr', '-'), '032b') if state.ID.get('Instr', None) is not None else '-'}",
             f"Instr: {format(state.EX.get('instr', '-'), '032b') if state.EX.get('instr', None) is not None else '-'}",
-            f"ALU: {state.MEM.get('ALUresult', '-')}
+            f'''ALU: {state.MEM.get('ALUresult', '-')}
 Store: {state.MEM.get('Store_data', '-')}
 Rd: {state.MEM.get('Wrt_reg_addr', '-')}
 MemR: {state.MEM.get('rd_mem', '-')}
@@ -110,14 +110,14 @@ MemW: {state.MEM.get('wrt_mem', '-')}
 WE: {state.MEM.get('wrt_enable', '-')}
 M2R: {state.MEM.get('mem_to_reg', '-')}
 NOP: {state.MEM.get('nop', '-')}
-PC: {state.MEM.get('PC', '-')}",
-            f"WData: {state.WB.get('Wrt_data', '-')}
+PC: {state.MEM.get('PC', '-')}''',
+            f'''WData: {state.WB.get('Wrt_data', '-')}
 Rd: {state.WB.get('Wrt_reg_addr', '-')}
 WE: {state.WB.get('wrt_enable', '-')}
 M2R: {state.WB.get('mem_to_reg', '-')}
 ALU: {state.WB.get('ALUresult', '-')}
 RData: {state.WB.get('read_data', '-')}
-NOP: {state.WB.get('nop', '-')}",
+NOP: {state.WB.get('nop', '-')}''',
         ]
         for lbl, val in zip(self.value_labels, stage_values):
             lbl.config(text=val)
