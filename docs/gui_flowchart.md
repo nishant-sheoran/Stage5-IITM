@@ -3,14 +3,14 @@
 ```mermaid
 graph TD
     A[Start] --> B[User Launches GUI]
-    B --> C[User Loads Input Files (imem.txt, dmem.txt)]
+    B --> C[User Loads Input Files]
     C --> D[Initialize Simulation Core]
     D --> E{Simulation Halted?}
     E -- No --> F[User Steps Through Next Cycle]
     F --> G[Update Pipeline State Visualization]
     G --> E
     E -- Yes --> H[Display Performance Metrics]
-    H --> I[User Reviews Output Files (optional)]
+    H --> I[User Reviews Output Files]
     I --> J[End]
 ```
 
