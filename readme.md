@@ -2,6 +2,8 @@
 
 This project is a Python-based simulator for the RISC-V instruction set, supporting both single-stage and 5-stage pipelined architectures. It is designed for educational and experimental purposes, focusing on basic arithmetic and logical operations, hazard detection, and pipeline visualization.
 
+![Implementation GIF](docs/RISC-V.gif)
+
 ## Features
 - **5-Stage Pipeline Simulation:** Models IF, ID, EX, MEM, WB stages with hazard detection and forwarding.
 - **Single-Stage Simulation:** For comparison and reference.
@@ -69,12 +71,26 @@ In the Five-Stage machine, I added the forwarding unit and the hazard control un
   - Instructions per cycle (IPC)
 - These are also saved to `PerformanceMetrics_Result.txt` in your input/output folder.
 
-## Project Structure
+## Project Structure and Flowchart
 - `pipeline_gui.py`: Main GUI for running and visualizing the simulator.
 - `src/`: Source code for the simulator core, memory, register file, hazard handling, and metrics.
 - `input/`: Example input files (`imem.txt`, `dmem.txt`, `Code.asm`).
 - `Sample_Testcases_FS/`: Sample testcases with input and reference output files.
 - `docs/`: Schematics and documentation.
+
+```mermaid  
+graph TD
+    A[Start] --> B[User Launches GUI]
+    B --> C[User Loads Input Files]
+    C --> D[Initialize Simulation Core]
+    D --> E{Simulation Halted?}
+    E -- No --> F[User Steps Through Next Cycle]
+    F --> G[Update Pipeline State Visualization]
+    G --> E
+    E -- Yes --> H[Display Performance Metrics]
+    H --> I[User Reviews Output Files]
+    I --> J[End]
+```
 
 ## Reference
 
